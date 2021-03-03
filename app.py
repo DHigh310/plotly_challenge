@@ -21,3 +21,16 @@ db = SQLAlchemy(app)
 # reflect an existing database into a new model
 Base = automap_base()
 Base.prepare(db.engine, reflect=True)
+
+# Save references to each table
+Samples_Metadata = Base.classes.sample_metadata
+Samples = Base.classes.samples
+
+@app.route("/")
+def index():
+    """Return the homepage."""
+    return render_template("index.html")
+
+    @app.route("/names")
+def names():
+    """Return a list of sample names."""
